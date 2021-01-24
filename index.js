@@ -55,7 +55,7 @@ You can also contact me via my email: ${answers.email}
 `.trim();
 
     // Write the generated markup to a file named 'README.md'
-    fs.writeFile('READMETest.md', readmeString, error => {
+    fs.writeFile('README.md', readmeString, error => {
         error ? console.error(error) : console.log("README.md generated successfully!"); // If the file write fails, log an error, otherwise log a message saying it's successful
     });
 
