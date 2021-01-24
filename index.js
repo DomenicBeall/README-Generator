@@ -2,6 +2,7 @@
 const inq = require("inquirer");
 const fs = require("fs");
 
+// Store the list of questions to be asked by inquirer
 const questions = [
     {type: 'input', name: 'title', message: 'What is the project title? '},
     {type: 'input', name: 'description', message: 'Describe the project in a few sentences: '},
@@ -14,23 +15,56 @@ const questions = [
     {type: 'input', name: 'email', message: 'What is your contact email address? '},
 ];
 
+// Prompt the user for content to fill the README
 inq.prompt(questions).then(answers => {
-    // Use answers to create README
 
+    // Get the corresponding badge markup for the licence the user selected
     let licenceBadge = getLicenceBadge(answers.licence);
 
-    let readmeString = 
-    `# ${answers.title}
-    ${licenceBadge}
-    `;
+    // Fill a template string with the answers the user gave
+    let readmeString = `
+# ${answers.title}
+${licenceBadge}
 
+## Description
+${answers.description}
+
+## Table Of Contents
+- [Install Instructions](#install-instructions)
+- [Usage Information](#usage-information)
+- [Contribution Guidelines](#contribution-guidelines)
+- [Testing Instructions](#testing-instructions)
+- [Questions](#questions)
+
+
+## Install Instructions
+${answers.installInstructions}
+
+## Usage Information
+${answers.usageInfo}
+
+## Contribution Guidelines
+${answers.contribGuidelines}
+
+## Testing Instructions
+${answers.testInstructions}
+
+## Questions
+If you would like to contact the owner with any questions, I can be found on <a href="https://www.github.com/${answers.githubUsername}">GitHub<a>.
+You can also contact me via my email: ${answers.email}
+`.trim();
+
+    // Write the generated markup to a file named 'README.md'
     fs.writeFile('READMETest.md', readmeString, error => {
-        error ? console.error(error) : console.log("README.md generated successfully!");
+        error ? console.error(error) : console.log("README.md generated successfully!"); // If the file write fails, log an error, otherwise log a message saying it's successful
     });
+
+// If the prompt for information fails in some way, log the error
 }).catch(error => {
     console.log(error);
 });
 
+// Takes the licence selected as a string and returns the appropriate markup for the badge
 function getLicenceBadge(licence) {
 
     switch (licence) {
