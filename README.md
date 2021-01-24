@@ -27,3 +27,6 @@ There are no test instructions for this project.
 ## Questions
 If you would like to contact the owner with any questions, I can be found on <a href="https://www.github.com/DomenicBeall">GitHub<a>.
 You can also contact me via my email: domenicbeall2@gmail.com
+
+## Walkthrough
+A walkthrough of the functionality can be found on <a href="https://www.youtube.com/watch?v=JnAIC1sMm2s&feature=youtu.be">YouTube</a>.
